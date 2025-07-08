@@ -36,7 +36,7 @@ def return_previous_update(iterable):
 @app.route("/get-summary", methods=["GET"])
 def get_weather():
     try:
-        weather_data = list(summary_collection.find({}, {"_id"}))
+        weather_data = list(summary_collection.find({}, {"_id": 0}))
     except Exception as e:
         return f"Error, {e}"
     return jsonify(weather_data), 200
@@ -44,7 +44,7 @@ def get_weather():
 @app.route("/get-hour", methods=["GET"])
 def get_hour():
     try:
-        hour_data = list(hourly_collection.find({}, {"_id"}))
+        hour_data = list(hourly_collection.find({}, {"_id": 0}))
     except Exception as e:
         return f"Error, {e}"
     return jsonify(hour_data), 200
@@ -52,7 +52,7 @@ def get_hour():
 @app.route("/get-readings", methods=["GET"])
 def get_readings():
     try:
-        readings_data = list(readings_collection.find({}, {"_id"}))
+        readings_data = list(readings_collection.find({}, {"_id": 0}))
     except Exception as e:
         return f"Erro, {e}"
     return jsonify(readings_data), 200
