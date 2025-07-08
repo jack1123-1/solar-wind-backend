@@ -12,7 +12,7 @@ password = quote_plus("@sitesignup515@")
 app = Flask(__name__)
 CORS(app)
 uri = f"mongodb+srv://{username}:{password}@weather.crydxka.mongodb.net/?retryWrites=true&w=majority&appName=weather"
-client = MongoClient(uri, server_api=ServerApi('1'))    
+client = MongoClient(uri, server_api=ServerApi('1'), tls=True, tlsAllowInvalidCertificates=True)    
 
 db = client["weather_database"]
 summary_collection = db["winter_summary"]
