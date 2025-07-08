@@ -19,21 +19,12 @@ summary_collection = db["winter_summary"]
 hourly_collection = db["winter_hour"]
 readings_collection = db["winter_readings"]
 
-#try:
-#    client.admin.command('ping')
-#    print("Pinged your deployment. You successfully connected to MongoDB!")
-#except Exception as e:
-#    print(e)
-
 def return_last_update(iterable):
     last = len(iterable) - 1
     index = random.randint(0, last)
     if not iterable:
         return None
     return iterable[index]
-#    if not iterable:
-#        return None
-#    return (iterable[0])
 
 def return_previous_update(iterable):
     last = len(iterable) - 1
@@ -41,25 +32,8 @@ def return_previous_update(iterable):
     if len(iterable) < 2:
         return None
     return iterable[index]
-#    if len(iterable) < 2:
-#        return None
-#    return (iterable[1])
 
-@app.route("/add-weather", methods=["GET"])
-def add_data():
-    with open ("weather_data.json") as f:
-        data = json.load(f)    
-    result = summary_collection.insert_many(data)
-    return f"success", 201
-
-@app.route("/add-readings", methods=["GET"])
-def add_readings():
-    with open("instrument_readings.json") as f:
-        data = json.load(f)
-    result = readings_collection.insert_many(data)
-    return f"success", 201
-
-@app.route("/get/summary", methods=["GET"])
+@app.route("/get-summary", methods=["GET"])
 def get_weather():
     try:
         weather_data = list(summary_collection.find({}, {"_id"}))
